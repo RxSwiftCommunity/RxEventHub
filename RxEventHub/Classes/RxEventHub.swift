@@ -85,6 +85,8 @@ public class RxEventHub {
 /// Event provider, provide name and type info for 1 kind of event.
 public class RxEventProvider<T> {
     
+    public init() {}
+    
     /**
      Create `PublishSubject` for event.
      
