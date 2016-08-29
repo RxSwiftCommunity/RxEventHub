@@ -1,0 +1,26 @@
+PODS:
+  - Nimble (3.2.0)
+  - Quick (0.9.3)
+  - RxEventHub (0.1.0):
+    - RxSwift (~> 2.5)
+  - RxSwift (2.6.0)
+
+DEPENDENCIES:
+  - Nimble (~> 3.0)
+  - Quick (~> 0.8)
+  - RxEventHub (from `../`)
+  - RxSwift
+
+EXTERNAL SOURCES:
+  RxEventHub:
+    :path: ../
+
+SPEC CHECKSUMS:
+  Nimble: 703854335d181df169bbca9c97117b5cf8c47c1d
+  Quick: 13a2a2b19a5d8e3ed4fd0c36ee46597fd77ebf71
+  RxEventHub: d37864d30009a6b232a2b2ba877d645d31c363f9
+  RxSwift: 77f3a0b15324baa7a1c9bfa9f199648a82424e26
+
+PODFILE CHECKSUM: 158f498a4bf8c2e20139ddc91c71df64f3107527
+
+COCOAPODS: 1.0.1
