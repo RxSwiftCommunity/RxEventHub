@@ -52,7 +52,7 @@ Just copy `RxEventHub.swift` into your project, and you're ready to go.
 
 ## Author
 
-Chen Shenghan, zzdjk6@gmail.com
+Chen Shenghan, zzdjk6@gmail.com / zzdjk6@126.com
 
 ## License
 

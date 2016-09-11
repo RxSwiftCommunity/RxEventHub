@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
 
   s.homepage         = 'https://github.com/zzdjk6/RxEventHub'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Chen Shenghan' => 'zzdjk6@gmail.com' }
+  s.author           = { 'zzdjk6' => 'zzdjk6@126.com' }
   s.source           = { :git => 'https://github.com/zzdjk6/RxEventHub.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/zzdjk6'
 
