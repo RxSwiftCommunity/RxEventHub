@@ -1,7 +1,7 @@
 /*
  RxEventHub.swift
  
- Copyright (c) 2016 Chen Shenghan <zzdjk6@gmail.com>
+ Copyright (c) RxSwiftCommunity
  
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
