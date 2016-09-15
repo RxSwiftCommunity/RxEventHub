@@ -1,6 +1,6 @@
 # RxEventHub
 
-[![CI Status](http://img.shields.io/travis/zzdjk6/RxEventHub.svg?style=flat)](https://travis-ci.org/RxSwiftCommunity/RxEventHub)
+[![CI Status](http://img.shields.io/travis/RxSwiftCommunity/RxEventHub.svg?style=flat)](https://travis-ci.org/RxSwiftCommunity/RxEventHub)
 [![Version](https://img.shields.io/cocoapods/v/RxEventHub.svg?style=flat)](http://cocoapods.org/pods/RxEventHub)
 [![License](https://img.shields.io/cocoapods/l/RxEventHub.svg?style=flat)](http://cocoapods.org/pods/RxEventHub)
 [![Platform](https://img.shields.io/cocoapods/p/RxEventHub.svg?style=flat)](http://cocoapods.org/pods/RxEventHub)
