@@ -23,7 +23,7 @@ You can notify the hub when events occur by simply writing 1 line code like belo
 RxEventHub.sharedHub.notify(ExampleIntEventProvider(), data: 2)
 ```
 
-You can get the `Observable` (`Observable<T>` in this example) when events occur by simply writing 1 line code like below:
+You can get the `Observable` (`Observable<Int>` in this example) when events occur by simply writing 1 line code like below:
 
 ```swift
 RxEventHub.sharedHub.eventObservable(ExampleIntEventProvider())
