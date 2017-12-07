@@ -33,7 +33,7 @@ One more thing, you can either use the default hub `RxEventHub.sharedHub`, or cr
 
 ## Requirements
 
-* Swift 2.x (use another branch for Swift 3, work in progress)
+* Swift 3 (use 0.1.1 version for Swift 2)
 
 ## Installation
 
