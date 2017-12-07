@@ -26,10 +26,10 @@ import Foundation
 import RxSwift
 
 /// Event hub class, you can use `sharedHub` as provided, or create your own instance.
-public class RxEventHub {
+open class RxEventHub {
     
     /// Singleton
-    public static let sharedHub = RxEventHub()
+    open static let sharedHub = RxEventHub()
     
     /// DisposeBag
     private let disposeBag = DisposeBag()
@@ -43,7 +43,7 @@ public class RxEventHub {
      - parameter provider: An instance of RxEventProvider, provide name and type info for 1 kind of event.
      - parameter data:     The data packaged with notification, send to all observers.
      */
-    public func notify<T>(provider: RxEventProvider<T>, data: T) {
+    open func notify<T>(_ provider: RxEventProvider<T>, data: T) {
         let subject = eventSubject(provider)
         subject.onNext(data)
     }
@@ -55,7 +55,7 @@ public class RxEventHub {
      
      - returns: `Observable` for given kind of event.
      */
-    public func eventObservable<T>(provider: RxEventProvider<T>) -> Observable<T> {
+    open func eventObservable<T>(_ provider: RxEventProvider<T>) -> Observable<T> {
         let subject = eventSubject(provider)
         return subject.asObservable()
     }
@@ -69,7 +69,7 @@ public class RxEventHub {
      
      - returns: `PublishSubject` for given kind of event.
      */
-    private func eventSubject<T>(provider: RxEventProvider<T>) -> PublishSubject<T> {
+    private func eventSubject<T>(_ provider: RxEventProvider<T>) -> PublishSubject<T> {
         let key = provider.typeKey()
         if let subject = subjectDict[key] as? PublishSubject<T> {
             return subject
@@ -83,7 +83,7 @@ public class RxEventHub {
 }
 
 /// Event provider, provide name and type info for 1 kind of event.
-public class RxEventProvider<T> {
+open class RxEventProvider<T> {
     
     public init() {}
     
@@ -92,7 +92,7 @@ public class RxEventProvider<T> {
      
      - returns: `PublishSubject` with type from given paramter.
      */
-    public func publishSubject() -> PublishSubject<T> {
+    open func publishSubject() -> PublishSubject<T> {
         return PublishSubject<T>()
     }
     
@@ -103,8 +103,8 @@ public class RxEventProvider<T> {
      
      - returns: Key string
      */
-    public func typeKey() -> String {
-        let key = String(self.dynamicType)
+    open func typeKey() -> String {
+        let key = NSStringFromClass(type(of: self))
         return key
     }
 }

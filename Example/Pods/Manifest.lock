@@ -1,26 +1,26 @@
 PODS:
-  - Nimble (3.2.0)
-  - Quick (0.9.3)
-  - RxEventHub (0.1.0):
-    - RxSwift (~> 2.5)
-  - RxSwift (2.6.0)
+  - Nimble (7.0.3)
+  - Quick (1.2.0)
+  - RxEventHub (3.0):
+    - RxSwift (~> 3.0)
+  - RxSwift (3.6.1)
 
 DEPENDENCIES:
-  - Nimble (~> 3.0)
-  - Quick (~> 0.8)
+  - Nimble (= 7.0.3)
+  - Quick (= 1.2.0)
   - RxEventHub (from `../`)
-  - RxSwift
+  - RxSwift (= 3.6.1)
 
 EXTERNAL SOURCES:
   RxEventHub:
     :path: ../
 
 SPEC CHECKSUMS:
-  Nimble: 703854335d181df169bbca9c97117b5cf8c47c1d
-  Quick: 13a2a2b19a5d8e3ed4fd0c36ee46597fd77ebf71
-  RxEventHub: d37864d30009a6b232a2b2ba877d645d31c363f9
-  RxSwift: 77f3a0b15324baa7a1c9bfa9f199648a82424e26
+  Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
+  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
+  RxEventHub: f34a208a3a43ed0bfb13d223a87828f3e1528ad9
+  RxSwift: f9de85ea20cd2f7716ee5409fc13523dc638e4e4
 
-PODFILE CHECKSUM: 158f498a4bf8c2e20139ddc91c71df64f3107527
+PODFILE CHECKSUM: b2538567d819748cca212013bcb1cf0999da3302
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.4.0.beta.1

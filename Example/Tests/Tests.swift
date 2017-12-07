@@ -5,6 +5,8 @@ import Nimble
 import RxSwift
 import RxEventHub
 
+fileprivate let CURRENT_TARGET = "RxEventHub_Tests"
+
 class ExampleClass {
     var intVar: Int = 0
     var doubleVar: Double = 0.0
@@ -25,7 +27,7 @@ class ExampleStringEventProvider: RxEventProvider<String>{}
 class ExampleTupleEventProvider: RxEventProvider<(int: Int, double: Double, string: String)>{}
 class ExampleClassEventProvider: RxEventProvider<ExampleClass>{
     override func typeKey() -> String {
-        return String(self.dynamicType) + ".ExampleClass"
+        return String(describing: type(of: self)) + ".ExampleClass"
     }
 }
 
@@ -33,23 +35,23 @@ class RxEventProviderSpec: QuickSpec {
     
     override func spec() {
         it("should have correct name") {
-            expect(ExampleOptionalEventProvider().typeKey()) == "ExampleOptionalEventProvider"
-            expect(ExampleVoidEventProvider().typeKey()) == "ExampleVoidEventProvider"
-            expect(ExampleIntEventProvider().typeKey()) == "ExampleIntEventProvider"
-            expect(ExampleDoubleEventProvider().typeKey()) == "ExampleDoubleEventProvider"
-            expect(ExampleStringEventProvider().typeKey()) == "ExampleStringEventProvider"
-            expect(ExampleTupleEventProvider().typeKey()) == "ExampleTupleEventProvider"
+            expect(ExampleOptionalEventProvider().typeKey()) == "\(CURRENT_TARGET)." + "ExampleOptionalEventProvider"
+            expect(ExampleVoidEventProvider().typeKey()) == "\(CURRENT_TARGET)." + "ExampleVoidEventProvider"
+            expect(ExampleIntEventProvider().typeKey()) == "\(CURRENT_TARGET)." + "ExampleIntEventProvider"
+            expect(ExampleDoubleEventProvider().typeKey()) == "\(CURRENT_TARGET)." + "ExampleDoubleEventProvider"
+            expect(ExampleStringEventProvider().typeKey()) == "\(CURRENT_TARGET)." + "ExampleStringEventProvider"
+            expect(ExampleTupleEventProvider().typeKey()) == "\(CURRENT_TARGET)." + "ExampleTupleEventProvider"
             expect(ExampleClassEventProvider().typeKey()) == "ExampleClassEventProvider.ExampleClass"
         }
         
         it("should create correct publish subject of given type") {
-            expect(String(ExampleOptionalEventProvider().publishSubject().dynamicType)) == "PublishSubject<Optional<Bool>>"
-            expect(String(ExampleVoidEventProvider().publishSubject().dynamicType)) == "PublishSubject<()>"
-            expect(String(ExampleIntEventProvider().publishSubject().dynamicType)) == "PublishSubject<Int>"
-            expect(String(ExampleDoubleEventProvider().publishSubject().dynamicType)) == "PublishSubject<Double>"
-            expect(String(ExampleStringEventProvider().publishSubject().dynamicType)) == "PublishSubject<String>"
-            expect(String(ExampleTupleEventProvider().publishSubject().dynamicType)) == "PublishSubject<(Int, Double, String)>"
-            expect(String(ExampleClassEventProvider().publishSubject().dynamicType)) == "PublishSubject<ExampleClass>"
+            expect(String(describing: type(of: ExampleOptionalEventProvider().publishSubject()))) == "PublishSubject<Optional<Bool>>"
+            expect(String(describing: type(of: ExampleVoidEventProvider().publishSubject()))) == "PublishSubject<()>"
+            expect(String(describing: type(of: ExampleIntEventProvider().publishSubject()))) == "PublishSubject<Int>"
+            expect(String(describing: type(of: ExampleDoubleEventProvider().publishSubject()))) == "PublishSubject<Double>"
+            expect(String(describing: type(of: ExampleStringEventProvider().publishSubject()))) == "PublishSubject<String>"
+            expect(String(describing: type(of: ExampleTupleEventProvider().publishSubject()))) == "PublishSubject<(int: Int, double: Double, string: String)>"
+            expect(String(describing: type(of: ExampleClassEventProvider().publishSubject()))) == "PublishSubject<ExampleClass>"
         }
     }
 }
@@ -64,9 +66,13 @@ class RxEventHubSpec: QuickSpec {
         
         it("can notify and subscribe events with Void Param") {
             var receivedNotification = false
-            hub.eventObservable(ExampleVoidEventProvider()).subscribeNext {
-                receivedNotification = true
-                }.addDisposableTo(disposeBag)
+            hub
+                .eventObservable(ExampleVoidEventProvider())
+                .do(onNext: {
+                    receivedNotification = true
+                })
+                .subscribe()
+                .addDisposableTo(disposeBag)
             hub.notify(ExampleVoidEventProvider(), data: ())
             
             waitUntil { done in
@@ -78,9 +84,13 @@ class RxEventHubSpec: QuickSpec {
         
         it("can notify and subscribe events with Int Param") {
             var intVar = 0
-            hub.eventObservable(ExampleIntEventProvider()).subscribeNext { (obj) in
-                intVar = obj
-            }.addDisposableTo(disposeBag)
+            hub
+                .eventObservable(ExampleIntEventProvider())
+                .do(onNext: { obj in
+                    intVar = obj
+                })
+                .subscribe()
+                .addDisposableTo(disposeBag)
             hub.notify(ExampleIntEventProvider(), data: 2)
             
             waitUntil { done in
@@ -92,9 +102,13 @@ class RxEventHubSpec: QuickSpec {
         
         it("can notify and subscribe events with Double Param") {
             var doubleVar = 0.0
-            hub.eventObservable(ExampleDoubleEventProvider()).subscribeNext { (obj) in
-                doubleVar = obj
-                }.addDisposableTo(disposeBag)
+            hub
+                .eventObservable(ExampleDoubleEventProvider())
+                .do(onNext: { obj in
+                     doubleVar = obj
+                })
+                .subscribe()
+                .addDisposableTo(disposeBag)
             hub.notify(ExampleDoubleEventProvider(), data: 2.2)
             
             waitUntil { done in
@@ -106,9 +120,13 @@ class RxEventHubSpec: QuickSpec {
         
         it("can notify and subscribe events with String Param") {
             var stringVar = ""
-            hub.eventObservable(ExampleStringEventProvider()).subscribeNext { (obj) in
-                stringVar = obj
-                }.addDisposableTo(disposeBag)
+            hub
+                .eventObservable(ExampleStringEventProvider())
+                .do(onNext: { obj in
+                     stringVar = obj
+                })
+                .subscribe()
+                .addDisposableTo(disposeBag)
             hub.notify(ExampleStringEventProvider(), data: "abc")
             
             waitUntil { done in
@@ -120,9 +138,13 @@ class RxEventHubSpec: QuickSpec {
         
         it("can notify and subscribe events with Tuple Param") {
             var tupleVar: (int: Int, double: Double, string: String) = (int: 0, double: 0.0, string: "")
-            hub.eventObservable(ExampleTupleEventProvider()).subscribeNext { (obj) in
-                tupleVar = obj
-                }.addDisposableTo(disposeBag)
+            hub
+                .eventObservable(ExampleTupleEventProvider())
+                .do(onNext: { obj in
+                     tupleVar = obj
+                })
+                .subscribe()
+                .addDisposableTo(disposeBag)
             hub.notify(ExampleTupleEventProvider(), data: (int: 2, double: 2.2, string: "abc"))
             
             waitUntil { done in
@@ -136,9 +158,13 @@ class RxEventHubSpec: QuickSpec {
         
         it("can notify and subscribe events with Custom Class Param") {
             var classVar: ExampleClass = ExampleClass()
-            hub.eventObservable(ExampleClassEventProvider()).subscribeNext { (obj) in
-                classVar = obj
-                }.addDisposableTo(disposeBag)
+            hub
+                .eventObservable(ExampleClassEventProvider())
+                .do(onNext: { obj in
+                    classVar = obj
+                })
+                .subscribe()
+                .addDisposableTo(disposeBag)
             hub.notify(ExampleClassEventProvider(), data: ExampleClass(intVar: 2, doubleVar: 2.2, stringVar: "abc"))
             
             waitUntil { done in
@@ -152,9 +178,13 @@ class RxEventHubSpec: QuickSpec {
         
         it("can notify and subscribe events with Optional Param") {
             var optionalVar: Bool? = true
-            hub.eventObservable(ExampleOptionalEventProvider()).subscribeNext { (obj) in
-                optionalVar = obj
-                }.addDisposableTo(disposeBag)
+            hub
+                .eventObservable(ExampleOptionalEventProvider())
+                .do(onNext: { obj in
+                    optionalVar = obj
+                })
+                .subscribe()
+                .addDisposableTo(disposeBag)
             hub.notify(ExampleOptionalEventProvider(), data: nil)
             
             waitUntil { done in

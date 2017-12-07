@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'RxEventHub'
-  s.version          = '0.1.1'
+  s.version          = '3.0'
   s.summary          = '`RxEventHub` makes multicasting event easy, type-safe and error-free, use it instead of `NSNotificationCenter` now!'
 
   s.description      = <<-DESC
@@ -14,5 +14,5 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '8.0'
   s.source_files = 'RxEventHub/Classes/**/*'
-  s.dependency 'RxSwift', '~> 2.5'
+  s.dependency 'RxSwift', '~> 3.0'
 end
